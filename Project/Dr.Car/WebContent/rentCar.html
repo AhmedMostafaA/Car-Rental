@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title id="Description">This demo shows the default
+	functionality of jqxRibbon. This widget can be used as a tabbed toolbar
+	or mega menu.</title>
+<meta name="keywords"
+	content="jQuery mega menu, jQuery ribbon, jQuery ribbon bar, jQWidgets, jqxRibbon, mega menu, ribbon, ribbon bar, tab, toolbar" />
+<meta name="description"
+	content="This demo shows the default functionality of jqxRibbon. This widget can be used as a tabbed toolbar or mega menu." />
+<link type="text/css" rel="stylesheet"
+	href="jqwidgets/styles/jqx.base.css" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxribbon.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxcheckbox.js"></script>
+
+<!--<script type="text/javascript" src="../../scripts/demos.js"></script>
+    <script type='text/javascript' src='js/rentCar.js' /></script>
+    -->
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						// prepare the data
+						var data = [ {
+							cars : [ {
+								img : 'images/logo/toyotacamry.jpg',
+								price : "200",
+								name : "camry",
+								id : "23"
+							}, {
+								img : 'images/logo/toyotacorolla.jpg',
+								price : "250",
+								name : "corolla",
+								id : "18"
+							}, {
+								img : 'images/logo/kiasedan.jpg',
+								price : "250",
+								name : "cerato",
+								id : "16"
+							}, {
+								img : 'images/logo/mercedes.jpg',
+								price : "500",
+								name : "mercedes",
+								id : "22"
+							}, {
+								img : 'images/logo/bmw.jpg',
+								price : "550",
+								name : "bmw",
+								id : "19"
+							}, {
+								img : 'images/logo/hondacivic.jpg',
+								price : "500",
+								name : "civic",
+								id : "15"
+							},
+
+
+							]
+						}, {
+							cars : [ {
+								img : 'images/logo/jeep.jpg',
+								price : "700",
+								name : "jeep",
+								id : "21"
+							}, {
+								img : 'images/logo/skoda.jpg',
+								price : "700",
+								name : "skoda",
+								id : "17"
+							},
+
+							]
+						}, {
+							cars : [ {
+								img : 'images/logo/bmwcon.jpg',
+								price : "1500",
+								name : "bmw",
+								id : "14"
+							}, {
+								img : 'images/logo/audicon.jpg',
+								price : "1200",
+								name : "audi",
+								id : "13"
+							}, {
+								img : 'images/logo/fordcon.jpg',
+								price : "1700",
+								name : "ford",
+								id : "20"
+							} ]
+						} ];
+						var source = {
+							localData : data,
+							dataType : "array"
+						};
+						var dataAdapter = new $.jqx.dataAdapter(source);
+						dataAdapter.dataBind();
+						var records = dataAdapter.records;
+
+						var ids = [3];
+						var names = [3];
+						for (var j = 0; j < records.length; j++) {
+							var rowData = records[j];
+							var cars = rowData.cars;
+							var container = "<div style='padding-left: 15px;'> "; 
+							ids[j] = [cars.length];
+							names[j] = [cars.length];
+							for (var i = 0; i < cars.length; i++) {
+								var car = cars[i];
+
+								ids[j][i] = car.id;
+								names[j][i] = car.name;
+								var item = "<div style='float: left; width: 220px; overflow: hidden; white-space: nowrap; height: 265px;'>";
+								var image = "<div style='margin: 5px; margin-bottom: 3px;'>";
+								var imgurl = car.img;
+								var img = '<img width=160 height=120 style="display: block;" src="' + imgurl + '"/>';
+								image += img;
+								image += "</div>";
+								
+								var info = "<div style='margin: 5px; margin-left: 20px; margin-bottom: 3px;'>";
+								var name = "<div id='n"+i+""+j+"'>"+car.name+"</div>";
+								var id = "<div id='i"+i+""+j+"'>"+car.id+"</div>";
+								info += "<div>Price: $" + car.price +name +id 
+										+ "</div>";
+								info += "</div>";
+								var buy = "<button class='buy' id='"+i+""+j+"' style='margin: 5px; width: 80px; left: -50px; position: relative; margin-left: 50%; margin-bottom: 3px;'>Rent</button>";
+								item += image;
+								item += info;
+								item += buy;
+								item += "</div>";
+								container += item;
+							}
+							container += "</div>";
+							$(container).appendTo($("#content"));
+						}
+						$('.buy').jqxButton();
+						$(".buy").click(function() {
+							var d = $(this).attr('id');
+							var cid = parseInt(d);
+							var temp= cid /10 ;
+							var i = parseInt(temp);
+							var j = parseInt((temp-i)*10) ; 
+							//alert(names[j][i]);
+							 $.post("RentCar",
+							          {
+							            carid: ids[j][i],
+							            carname: names[j][i]
+							  		},
+							  		function(data){
+             							$("#div1").html(data);
+         					});
+						});
+						var itemsInCart = 0;
+						$("#jqxRibbon").jqxRibbon({
+							
+							position : "top",
+							mode : 'popup',
+							selectedIndex : 0,
+							selectionMode : "click",
+							animationType : "fade",
+							
+						});
+						// $("#megaMenuMode").jqxCheckBox({
+						// 	width : 130,
+						// 	checked : true
+						// });
+						// $("#megaMenuMode").on('change', function(event) {
+						// 	var checked = event.args.checked;
+						// 	$("#jqxRibbon").jqxRibbon({
+						// 		mode : checked ? "popup" : "default"
+						// 	});
+						// });
+					});
+</script>
+
+
+
+<style>
+body, html {
+    color: #373C40;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 120%;
+    height: 100%;
+    background-color:  #2F2F2E;
+   
+}
+.reg{
+    width:800px;
+    margin: 30px auto 0px auto;
+    height:530px;
+    background-color:#2F2F2E;
+    padding:5px;
+    
+}
+
+.tag-title-info {
+	background: transparent;
+	width: 1px;
+	height: 0px;
+	border-color: #4272b8 transparent #4272b8 #4272b8 !important;
+	border-width: 26px 26px;
+	border-style: solid;
+	z-index: 1000;
+	top: 0px;
+	position: absolute;
+	left: 600px;
+}
+
+.tag-title {
+	font-size: 16px;
+	color: #fff;
+	position: absolute;
+	z-index: 100;
+	left: 0;
+	line-height: 100%;
+	background: #4272b8 !important;
+	height: 52px;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	width: 600px;
+	vertical-align: middle;
+}
+
+.cart-top {
+	font-family: Arial, Helvetica, sans-serif;
+	height: 35px;
+	position: absolute;
+	left: 580px;
+	width: 100px;
+	top: 0;
+	overflow: hidden;
+	color: #fff;
+	padding: 16px 14px 1px 14px;
+	font-size: 11px;
+	font-weight: 400;
+	background: #4272b8 !important;
+	z-index: 199;
+}
+
+.cart-top p {
+	font-weight: bold;
+	font-size: 11px;
+	background: url(images/ts1.jpg) no-repeat right center;
+	min-height: 16px;
+	text-align: left;
+	padding: 0 24px 0 0;
+	margin-top: 2px;
+	float: left;
+	font-size: 11px;
+	color: #fff;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+	
+	<div class="reg">
+
+		<div id="jqxRibbon" >
+			<ul >
+				<li style="margin-left: 20px;">Sedan</li>
+				<li>4x4</li>
+				<li>Convertibles</li>
+			</ul>
+			<div id="content"></div>
+		</div>
+	</div>
+</body>
+</html>

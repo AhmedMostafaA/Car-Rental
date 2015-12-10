@@ -1,0 +1,205 @@
+<html >
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/regStyle.css"/>
+        <script src="js/RegistCall.js"></script>
+    </head>
+    <body>    
+        <form action="" class="register">
+            <h2>Registration</h2>
+            <fieldset class="row1">
+                <legend>Account Details
+                </legend>
+                <p>
+                    <label>Email *
+                    </label>
+                    <input type="text" id="email"/>
+                    <label>Login Name*
+                    </label>
+                    <input type="text" id="loginName"/>
+                </p>
+                <p>
+                    <label>Password*
+                    </label>
+                    <input type="text" id="password"/>
+                </p>
+            </fieldset>
+            <fieldset class="row2">
+                <legend>Personal Details
+                </legend>
+                <p>
+                    <label>Name *
+                    </label>
+                    <input type="text" class="long" id="name"/>
+                </p>
+                <p>
+                    <label>Phone *
+                    </label>
+                    <input type="text" maxlength="10" id="phone"/>
+                </p>
+                <p>
+                    <label>Street *
+                    </label>
+                    <input type="text" class="long" id="streetName"/>
+                </p>
+                <p>
+                    <label>Street Num*
+                    </label>
+                    <input type="text" class="long" id="streetNum"/>
+                </p>
+                <p>
+                    <label class="optional">Floor
+                    </label>
+                    <input type="text" class="long"/>
+                </p>
+                <p>
+                    <label>City *
+                    </label>
+                    <input type="text" class="long" id="cite"/>
+                </p>
+                <p>
+                    <label class="optional">Postal Code
+                    </label>
+                    <input type="text" class="long" id="postalcode"/>
+                </p>
+
+
+            </fieldset>
+            <fieldset class="row3">
+                <legend>Further Information
+                </legend>
+                <p>
+                    <label>Gender *</label>
+                    <input type="radio" value="male" name="sex" id="male"/>
+                    <label class="gender">Male</label>
+                    <input type="radio" value="femal" name="sex"/>
+                    <label class="gender">Female</label>
+                </p>
+                <p>
+                    <label>Birthdate *
+                    </label>
+                    <select class="date" id="day">
+                        <option value="01">01
+                        </option>
+                        <option value="02">02
+                        </option>
+                        <option value="03">03
+                        </option>
+                        <option value="04">04
+                        </option>
+                        <option value="05">05
+                        </option>
+                        <option value="06">06
+                        </option>
+                        <option value="07">07
+                        </option>
+                        <option value="08">08
+                        </option>
+                        <option value="09">09
+                        </option>
+                        <option value="10">10
+                        </option>
+                        <option value="11">11
+                        </option>
+                        <option value="12">12
+                        </option>
+                        <option value="13">13
+                        </option>
+                        <option value="14">14
+                        </option>
+                        <option value="15">15
+                        </option>
+                        <option value="16">16
+                        </option>
+                        <option value="17">17
+                        </option>
+                        <option value="18">18
+                        </option>
+                        <option value="19">19
+                        </option>
+                        <option value="20">20
+                        </option>
+                        <option value="21">21
+                        </option>
+                        <option value="22">22
+                        </option>
+                        <option value="23">23
+                        </option>
+                        <option value="24">24
+                        </option>
+                        <option value="25">25
+                        </option>
+                        <option value="26">26
+                        </option>
+                        <option value="27">27
+                        </option>
+                        <option value="28">28
+                        </option>
+                        <option value="29">29
+                        </option>
+                        <option value="30">30
+                        </option>
+                        <option value="31">31
+                        </option>
+                    </select>
+                    <select id="month">
+                        <option value="01">January
+                        </option>
+                        <option value="02">February
+                        </option>
+                        <option value="03">March
+                        </option>
+                        <option value="04">April
+                        </option>
+                        <option value="05">May
+                        </option>
+                        <option value="06">June
+                        </option>
+                        <option value="07">July
+                        </option>
+                        <option value="08">August
+                        </option>
+                        <option value="09">September
+                        </option>
+                        <option value="10">October
+                        </option>
+                        <option value="11">November
+                        </option>
+                        <option value="12">December
+                        </option>
+                    </select>
+                    <input class="year" type="text" size="4" maxlength="4" id="year1"/>e.g 1976
+                </p>
+                <p>
+                    <label>Nationality *
+                    </label>
+                    <select id="nationality">
+                        <option value="0"></option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="Americans">Americans</option>
+                        <option value="Saudis">Saudis</option>
+                        <option value="Iraqis">Iraqis</option>
+                        <option value="Lebanese">Lebanese</option>
+                        <option value="Syrians">Syrians</option>
+                        <option value="Yemenis">Yemenis</option>
+                    </select>
+                </p>
+            </fieldset>
+
+            <fieldset class="row4">
+                <legend>Terms and Mailing
+                </legend>
+                <p class="agreement">
+                    <input type="checkbox" value=""/>
+                    <label>*  I accept the <a href="#">Terms and Conditions</a></label>
+                </p>
+                
+            </fieldset>
+            <div><button class="button" id ="loginBtn">Register &raquo;</button></div>
+        </form>
+    </body>
+</html>
+
+
+
+
+

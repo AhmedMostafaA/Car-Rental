@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.mybatis.mapper.CarMapper'>
+
+	<resultMap type='CarType' id='CarTypeResult'>
+		<id property='id' column='ID' />
+		<result property='name' column='NAME' />
+		<result property='producer' column='PRODUCER' />
+		<result property='type' column='TYPE' />
+		<result property='automatic' column='AUTOMATIC' />
+	</resultMap>
+	
+	<resultMap type='Customer' id='CustomerResult'>
+		<id property='id' column='ID' />
+		<result property='loginName' column='LOGIN_NAME' />
+		<result property='email' column='EMAIL' />
+		<result property='customerType' column='CUSTOMER_TYPE' />
+		<result property='firstName' column='FIRST_NAME' />
+		<result property='lastName' column='LAST_NAME' />
+		<result property='dateOfBirth' column='DATE_OF_BIRTH' />
+		<result property='password' column='PASSWORD' />
+		<result property='companyName' column='COMPANY_NAME' />
+		<result property='gender' column='GENDER' />
+		<result property='nationality' column='NATIONALITY' />
+	</resultMap>
+
+	<resultMap type='Booking' id='BookingResult'>
+		<id property='bookingNumber' column='BOOKING_NUMBER' />
+		<result property='bookingDate' column='BOOKING_DATE' />
+		<result property='returnDate' column='RETURN_DATE' />
+
+	</resultMap>
+
+	<resultMap type='Car' id='CarResult'>
+		<id property='id' column='ID' />
+		<result property='color' column='COLOR' />
+		<result property='basePricePerDay' column='BASE_PRICE_PER_DAY' />
+		<result property='dateOfManufacturing' column='DATE_OF_MANUFACTURING' />
+		<result property='link' column='link' />
+		<association property="carType" column="CAR_TYPE_ID" javaType="CarType" resultMap="CarTypeResult"/>	
+		<collection property="bookingCollection" ofType="Booking" resultMap="BookingResult" />
+	</resultMap>
+
+
+
+	<select id='getAllCar' resultMap='CarResult'>
+		SELECT * FROM car;
+	</select>
+
+	<select id='getCarById' resultMap='CarResult' parameterType='int'>
+		SELECT * FROM car WHERE ID = #{id};
+	</select>
+	
+	<select id='getCarBytype' resultMap='CarResult' parameterType='String'>
+		SELECT c.* FROM car c , car_type ct where ct.TYPE like #(type);
+	</select>
+
+	
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.mybatis.mapper.CustomerAddressMapper'>
+
+  
+ 
+   <resultMap type='CustomerAddress' id='CustomerAddressMapperResult'>
+    <id property='cid' column='ID'/>
+    <result property='streetName' column='STREET_NAME'/>
+    <result property='cityName' column='CITY_NAME'/>
+    <result property='streetNumber' column='STREET_NUMBER'/>
+    <result property='postalCode' column='POSTAL_CODE'/>
+    <result property='phoneNumber' column='PHONE_NUMBER'/>
+   </resultMap>
+
+
+  
+  <insert id='insertCustomerAddress' parameterType='CustomerAddress' useGeneratedKeys='true' keyProperty='cid'>
+    
+    INSERT INTO customer_address(STREET_NAME, CITY_NAME, STREET_NUMBER, POSTAL_CODE, PHONE_NUMBER)
+     VALUES (#{streetName},#{cityName},#{streetNumber},#{postalCode},#{phoneNumber});
+    
+  </insert>
+
+  <update id='updateCustomerAddress' parameterType='CustomerAddress'>
+    UPDATE customer_address 
+    SET
+     STREET_NAME= #{streetName},
+     CITY_NAME= #{cityName},
+     STREET_NUMBER= #{streetNumber},
+     POSTAL_CODE= #{postalCode},
+     PHONE_NUMBER= #{phoneNumber},
+    WHERE ID = #{cid}
+  </update>
+
+  <delete id='deleteCustomerAddress' parameterType='int'>
+    DELETE FROM customer_address WHERE ID = #{cid}
+  </delete>
+
+</mapper>

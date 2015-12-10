@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.mybatis.mapper.CustomerMapper'>
+
+	<resultMap type='CustomerAddress' id='CustomerAddressMapperResult'>
+		<id property='cid' column='ID' />
+		<result property='streetName' column='STREET_NAME' />
+		<result property='cityName' column='CITY_NAME' />
+		<result property='streetNumber' column='STREET_NUMBER' />
+		<result property='postalCode' column='POSTAL_CODE' />
+		<result property='phoneNumber' column='PHONE_NUMBER' />
+	</resultMap>
+
+  <resultMap type='CarType' id='CarTypeResult'>
+		<id property='id' column='ID' />
+		<result property='name' column='NAME' />
+		<result property='producer' column='PRODUCER' />
+		<result property='type' column='TYPE' />
+		<result property='automatic' column='AUTOMATIC' />
+	</resultMap>
+
+
+	<resultMap type='Car' id='CarResult'>
+		<id property='id' column='ID' />
+		<result property='color' column='COLOR' />
+		<result property='basePricePerDay' column='BASE_PRICE_PER_DAY' />
+		<result property='dateOfManufacturing' column='DATE_OF_MANUFACTURING' />
+
+		<association property="carType" column="CAR_TYPE_ID"
+			javaType="CarType" resultMap="CarTypeResult" />
+	</resultMap>
+
+	<resultMap type='Booking' id='BookingResult'>
+		<id property='bookingNumber' column='BOOKING_NUMBER' />
+		<result property='bookingDate' column='BOOKING_DATE' />
+		<result property='returnDate' column='RETURN_DATE' />
+
+		
+	</resultMap>
+
+	<resultMap type='Customer' id='CustomerResult'>
+		<id property='id' column='ID' />
+		<result property='loginName' column='LOGIN_NAME' />
+		<result property='email' column='EMAIL' />
+		<result property='customerType' column='CUSTOMER_TYPE' />
+		<result property='firstName' column='FIRST_NAME' />
+		<result property='lastName' column='LAST_NAME' />
+		<result property='dateOfBirth' column='DATE_OF_BIRTH' />
+		<result property='password' column='PASSWORD' />
+		<result property='companyName' column='COMPANY_NAME' />
+		<result property='gender' column='GENDER' />
+		<result property='nationality' column='NATIONALITY' />
+
+		<association property="customerAdd" column="CUSTOMER_ADD" javaType="CustomerAddress" resultMap="CustomerAddressMapperResult" />
+
+		  <collection property="bookingList" ofType="Booking"
+			resultMap="BookingResult" />
+	</resultMap>
+
+
+
+	<select id='getCustomerById' resultMap='CustomerResult'
+		parameterType='int'>
+		SELECT * FROM customer WHERE ID = #{id};
+	</select>
+
+
+	<select id='checkCustomer' resultMap='CustomerResult'
+		parameterType='com.mybatis.entities.ObjectLog'>
+		SELECT * FROM customer WHERE LOGIN_NAME = #{user} AND PASSWORD = #{pass};
+	</select>
+
+	<insert id='insertCustomer' parameterType='Customer'
+		useGeneratedKeys='true' keyProperty='id'>
+
+		INSERT INTO
+		customer(LOGIN_NAME,EMAIL, CUSTOMER_TYPE, FIRST_NAME,LAST_NAME,
+		DATE_OF_BIRTH, PASSWORD,COMPANY_NAME, GENDER, NATIONALITY,
+		CUSTOMER_ADD
+		)
+		VALUES
+		(#{loginName},#{email},#{customerType},#{firstName},#{lastName},#{dateOfBirth},#{password},#{companyName},#{gender},#{nationality},#{customerAdd.cid}
+		);
+
+	</insert>
+
+	<update id='updateCustomer' parameterType='Customer'>
+		UPDATE customer
+		SET
+		LOGIN_NAME=#{loginName},
+		EMAIL= #{email},
+		CUSTOMER_TYPE=
+		#{customerType},
+		FIRST_NAME= #{firstName},
+		LAST_NAME= #{lastName},
+		DATE_OF_BIRTH= #{dateOfBirth},
+		PASSWORD= #{password},
+		COMPANY_NAME=#{companyName},
+		GENDER= #{gender},
+		NATIONALITY=
+		#{nationality},
+		CUSTOMER_ADD = #{customerAdd.cid
+		WHERE ID = #{id}
+	</update>
+
+	<delete id='deleteCustomer' parameterType='int'>
+		DELETE FROM customer
+		WHERE ID = #{id};
+	</delete>
+
+
+
+</mapper>

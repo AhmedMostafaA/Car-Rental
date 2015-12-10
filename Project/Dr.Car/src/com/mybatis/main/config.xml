@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE configuration
+  PUBLIC '-//mybatis.org//DTD Config 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-config.dtd'>
+<configuration>
+	<properties resource='com/mybatis/main/jdbc.properties' />
+	<typeAliases>
+		<typeAlias type='com.mybatis.entities.Booking' alias='Booking'></typeAlias>
+		<typeAlias type='com.mybatis.entities.Car' alias='Car'></typeAlias>
+		<typeAlias type='com.mybatis.entities.CarType' alias='CarType'></typeAlias>
+		<typeAlias type='com.mybatis.entities.Customer' alias='Customer'></typeAlias>
+		<typeAlias type='com.mybatis.entities.CustomerAddress'
+			alias='CustomerAddress'></typeAlias>
+	</typeAliases>
+	<environments default='development'>
+		<environment id='development'>
+			<transactionManager type='JDBC' />
+			<dataSource type='POOLED'>
+				<property name='driver' value='${jdbc.driverClassName}' />
+				<property name='url' value='${jdbc.url}' />
+				<property name='username' value='${jdbc.username}' />
+				<property name='password' value='${jdbc.password}' />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource='com/mybatis/mapper/BookingMapper.xml' />
+		<mapper resource='com/mybatis/mapper/CarMapper.xml' />
+		<mapper resource='com/mybatis/mapper/CustomerAddressMapper.xml' />
+		<mapper resource='com/mybatis/mapper/CustomerMapper.xml' />
+
+	</mappers>
+</configuration>
